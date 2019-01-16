@@ -35,8 +35,8 @@ def notify():
 def delete_notification(notification_id):
     url = os.environ["CLAIR_ENDPOINT"] + '/v1/notifications/' + str(notification_id)
     resp = requests.delete(url)
-    if resp.status_code != 200:
-        print("Unable to delete " + notification_id)
+    if not (resp.status_code == 200 or resp.status_code == 202 or resp.status_code == 204):
+        print('Unable to delete ' + notification_id)
     else:
         print('DELETED ' + notification_id)
 
